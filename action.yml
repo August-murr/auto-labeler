@@ -1,5 +1,5 @@
-name: "OpenAI Issue Labeler"
-description: "Labels issues using OpenAI API"
+name: "Issue Classifier"
+description: "Classify issues by label with OpenAI"
 author: "Research11111"
 
 inputs:
