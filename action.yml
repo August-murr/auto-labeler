@@ -1,0 +1,34 @@
+name: "OpenAI Issue Labeler"
+description: "Labels issues using OpenAI API"
+author: "Research11111"
+
+inputs:
+  token:
+    description: "The GITHUB_TOKEN secret"
+    required: false
+    default: ${{ github.token }}
+  openai-api-key:
+    description: "The OpenAI API key secret"
+    required: true
+  openai-model:
+    description: "The OpenAI model to use, eg gpt-4 more costly but more accurate check https://openai.com/pricing"
+    required: false
+    default: "gpt-3.5-turbo-1106"
+
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/checkout@v3
+  - uses: actions/setup-python@v4
+    with:
+      python-version: '3.11'
+  - name: Install dependencies
+    shell: "bash"
+    run: pip install openai PyGithub
+  - name: Create calendar event
+    shell: "bash"
+    env:
+      GITHUB_TOKEN: ${{ inputs.token }}
+      OPENAI_API_KEY: ${{ inputs.openai-api-key }}
+      OPENAI_MODEL: ${{ inputs.openai-model }}
+    run: python "$GITHUB_ACTION_PATH/label.py"
