@@ -18,10 +18,11 @@ fulldescription_labels = [f"(name:\"{label.name}\",description:\"{label.descript
 
 print(f"""Guessing among : {",".join(available_labels)}""")
 issue = event['issue']        
-prompt = f"""On the current github repository, issues labels are: {",".join(fulldescription_labels)}.
+prompt = f"""You are a Github Issues Auto-labeller bot on Hugging Faces TRL(transformers reinforcement learning) library.
+            issues labels are: {",".join(fulldescription_labels)}.
             Guess from the following issue title and description what are the appropriate labels name (comma separated).
-            The decision must be driven by label description if there is no description use label name.
-            Reply only the label name in the response eg bug.
+            The decision must be driven by your knowledge of Hugging Face TRL and label description if there is no description use label name.
+            Reply only the label name in the response eg bug, DPO, question
             It is possible that no valid labels are applicable in that case respond empty string.
             Title: {issue['title']}
             Description: {issue['body']}
