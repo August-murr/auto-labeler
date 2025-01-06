@@ -23,7 +23,7 @@ prompt = f"""You are a Github Issues Auto-labeller bot on Hugging Faces TRL(tran
             Guess from the following issue title and description what are the appropriate labels name (comma separated).
             The decision must be driven by your knowledge of Hugging Face TRL and label description if there is no description use label name
             specially pay attention to the specific methods,trainers or packages mentioned in the issue to label them.
-            Reply only the label name in the response eg bug, DPO, question
+            Reply the label name extacly the way it's shown to you for example: ❓ question, 🏋 Online DPO, ✨ enhancement
             It is possible that no valid labels are applicable in that case respond empty string.
             Title: {issue['title']}
             Description: {issue['body']}
