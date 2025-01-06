@@ -13,7 +13,7 @@ inputs:
   openai-model:
     description: "The OpenAI model to use, eg gpt-4o-mini"
     required: false
-    default: "gpt-4o-mini"
+    default: "gpt-4o"
 
 runs:
   using: "composite"
