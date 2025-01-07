@@ -1,1 +1,1 @@
-OPENAI_API_KEY in repo secrets
+HF_API_KEY in repo secrets
