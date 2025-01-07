@@ -1,7 +1,7 @@
 import os
 import json
 from github import Github
-from openai import OpenAI
+from huggingface_hub import InferenceClient
 
 token = os.getenv('GITHUB_TOKEN')
 g = Github(token)
@@ -18,27 +18,25 @@ fulldescription_labels = [f"(name:\"{label.name}\",description:\"{label.descript
 
 print(f"""Guessing among : {",".join(available_labels)}""")
 issue = event['issue']        
-prompt = f"""You are a Github Issues Auto-labeller bot on Hugging Faces TRL(transformers reinforcement learning) library.
-            issues labels are: {",".join(fulldescription_labels)}.
-            Guess from the following issue title and description what are the appropriate labels name (comma separated).
+prompt = f"""issues labels are: {",".join(fulldescription_labels)}.
+            Guess from the following issue title and description what the appropriate label names are (comma separated).
             The decision must be driven by your knowledge of Hugging Face TRL and label description if there is no description use label name
             specially pay attention to the specific methods,trainers or packages mentioned in the issue to label them.
             Reply the label name extacly the way it's shown to you for example: ❓ question, 🏋 Online DPO, ✨ enhancement
             It is possible that no valid labels are applicable in that case respond empty string.
-            Title: {issue['title']}
-            Description: {issue['body']}
+            Title: {issue.title}
+            Description: {issue.body}
         """
 
-client = OpenAI()
+HF_API_KEY = os.getenv("HF_API_KEY")
+MODEL_NAME = os.getenv("MODEL_NAME")
+client = InferenceClient(model="meta-llama/Llama-3.2-1B-Instruct", token=HF_API_KEY)
+
 
 print(prompt)
-response = client.chat.completions.create(
-    model=os.getenv("OPENAI_MODEL"),
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": prompt}
-    ]
-)
+response = client.chat_completion(messages=[
+    {"role": "system", "content": "You are an Github Issues Auto-labeller bot on Hugging Faces TRL(transformers reinforcement learning) library."},
+    {"role": "user", "content": prompt}], max_tokens=50)
 
 print(response)
 
