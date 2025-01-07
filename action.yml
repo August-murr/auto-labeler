@@ -1,19 +1,19 @@
 name: "Issue Classifier"
-description: "Classify issues by label with OpenAI"
-author: "Research11111"
+description: "Classify issues by label with Hugging Face Inference Endpoint"
+author: "August-murr"
 
 inputs:
   token:
     description: "The GITHUB_TOKEN secret"
     required: false
     default: ${{ github.token }}
-  openai-api-key:
-    description: "The OpenAI API key secret"
+  hf-api-key:
+    description: "The HF API key secret"
     required: true
-  openai-model:
-    description: "The OpenAI model to use, eg gpt-4o-mini"
+  model-name:
+    description: "The model name to use, eg "meta-llama/Llama-3.2-70B-Instruct"
     required: false
-    default: "gpt-4o"
+    default: "meta-llama/Llama-3.2-1B-Instruct"
 
 runs:
   using: "composite"
@@ -24,11 +24,11 @@ runs:
       python-version: '3.11'
   - name: Install dependencies
     shell: "bash"
-    run: pip install openai PyGithub
+    run: pip install huggingface_hub PyGithub
   - name: Create calendar event
     shell: "bash"
     env:
       GITHUB_TOKEN: ${{ inputs.token }}
-      OPENAI_API_KEY: ${{ inputs.openai-api-key }}
-      OPENAI_MODEL: ${{ inputs.openai-model }}
+      HF_API_KEY: ${{ inputs.hf-api-key }}
+      MODEL_NAME: ${{ inputs.model-name }}
     run: python "$GITHUB_ACTION_PATH/label.py"
