@@ -24,8 +24,8 @@ prompt = f"""issues labels are: {",".join(fulldescription_labels)}.
             specially pay attention to the specific methods,trainers or packages mentioned in the issue to label them.
             Reply the label name extacly the way it's shown to you for example: ❓ question, 🏋 Online DPO, ✨ enhancement
             It is possible that no valid labels are applicable in that case respond empty string.
-            Title: {issue.title}
-            Description: {issue.body}
+            Title: {issue["title"]}
+            Description: {issue["body"]}
         """
 
 HF_API_KEY = os.getenv("HF_API_KEY")
