@@ -11,7 +11,7 @@ inputs:
     description: "The HF API key secret"
     required: true
   model-name:
-    description: "The model name to use, eg "meta-llama/Llama-3.2-70B-Instruct"
+    description: "The model name to use, eg meta-llama/Llama-3.2-70B-Instruct"
     required: false
     default: "meta-llama/Llama-3.2-1B-Instruct"
 
