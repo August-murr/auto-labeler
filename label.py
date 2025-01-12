@@ -30,7 +30,7 @@ prompt = f"""issues labels are: {",".join(fulldescription_labels)}.
 
 HF_API_KEY = os.getenv("HF_API_KEY")
 MODEL_NAME = os.getenv("MODEL_NAME")
-client = InferenceClient(model="meta-llama/Llama-3.2-1B-Instruct", token=HF_API_KEY)
+client = InferenceClient(model=MODEL_NAME, token=HF_API_KEY)
 
 
 print(prompt)
