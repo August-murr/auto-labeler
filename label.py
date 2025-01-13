@@ -2,6 +2,7 @@ import os
 import json
 from github import Github
 from huggingface_hub import InferenceClient
+import unicodedata
 
 token = os.getenv('GITHUB_TOKEN')
 g = Github(token)
@@ -40,7 +41,11 @@ response = client.chat_completion(messages=[
 
 print(response)
 
-labels = response.choices[0].message.content.strip().split(',') 
+labels = [
+    unicodedata.normalize("NFKC", lab).replace('\uFE0F', '').strip()
+    for lab in response.choices[0].message.content.strip().split(',')
+]
+labels = [label for label in labels if label in available_labels]
 
 print("Now labelling")
 for label in labels:
