@@ -76,6 +76,8 @@ labels = [
 ]
 labels = [label for label in labels if label in available_labels]
 
+print(labels)
+
 print("Now labelling")
 for label in labels:
     label = label.strip()
