@@ -30,6 +30,8 @@ The Auto Labeller Bot is a GitHub Action that automatically labels issues using 
     jobs:
       triage:
         runs-on: ubuntu-latest
+        permissions:
+          issues: write
         steps:
           - uses: actions/checkout@v3
           - uses: August-murr/auto-labeler@main
