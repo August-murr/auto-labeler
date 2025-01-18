@@ -12,7 +12,9 @@ The Auto Labeller Bot is a GitHub Action that automatically labels issues using 
 
 ## Requirements
 
-- A Hugging Face API token.
+- A Hugging Face API token. You may generate one at [Hugging Face Settings](https://huggingface.co/settings/tokens). Ensure it has the following permissions enabled:
+  - Make calls to the serverless Inference API
+  - Make calls to Inference Endpoints
 - A GitHub repository with issues enabled.
 
 ## Setup
